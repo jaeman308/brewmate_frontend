@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import {Routes, Route} from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
+import Landing from './components/Landing/Landing';
+import Dashboard from './components/Dashboard/Dashboard'
 import './App.css'
 
 const App = () => {
@@ -9,7 +11,13 @@ const App = () => {
   return (
     <>
     <NavBar user={user} />
-    <h1>Welcome to the BrewMate!</h1>
+    <Routes>
+      {user ? (
+        <Route path="/" element={<Dashboard user={user}/>}/>
+      ): (
+        <Route path="/" element={<Landing />} />
+      )}
+    </Routes>
 
     </>
   )
