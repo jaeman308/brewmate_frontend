@@ -17,12 +17,40 @@ export const AuthedUserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
-  
+  const [coffeelogs, setCoffeelogs] = useState([]);
+
+  useEffect (() => {
+    const fetchAllCoffeelogs = async () => {
+      const coffeelogData = await coffeelogService.index();
+      setCoffeelogs(coffeelogData);
+    }
+    if(user) fetchAllCoffeelogs();
+  }, [user]);
+
+const navigate = useNavigate();
+
+const handleAddCoffeelog = async (coffeelogFormData) => {
+  const newCoffeelog = await coffeelogService.create(coffeelogFormData);
+    setCoffeelogs((prevCoffeelogs) => [newCoffeelog, ...(Array.isArray(prevCoffeelogs) ? prevCoffeelogs : [])]);
+    navigate('/');
+}
+
+const handleDeleteCoffeelog = async (coffeelogFormData) => {
+  const deletedCoffeelog = await coffeelogService.deletedCoffeelog(coffeelogId);
+  setCoffeelogs(coffeelogs.filter((coffeelog) => coffeelog._id !== deletedCoffeelog._id))
+  navigate('/');
+};
+
+const handleUpdateCoffeelog = async (coffelogId, coffeelogFormData) => {
+  const updateCoffeelog = await coffeelogService.updateCoffeelog(coffelogId, coffeelogFormData);
+
+  setCoffeelogs(coffeelogs.map((coffeelog) => (coffeelogId === coffeelog._id ? updateCoffeelog : coffeelog)));
+  navigate('/');
+}
   const handleSignout = () => {
     authService.signout()
     setUser(null)
   }
-  const navigate = useNavigate();
   
   return (
     <>
@@ -35,7 +63,7 @@ const App = () => {
         <Route path="/coffee-beans" element={<CoffeeBeans />}/>
         <Route path="/coffee-shops" element={<CoffeeShops />}/>
         <Route path="/coffee-recipes" element={<CoffeeRecipes />}/>
-        <Route path="/coffeelogs/New" element={<CoffeelogForm />} />
+        <Route path="/coffeelogs/New" element={<CoffeelogForm handleAddCoffeelog={handleAddCoffeelog}/>} />
         </>
       ): (
         <Route path="/" element={<Landing />} />

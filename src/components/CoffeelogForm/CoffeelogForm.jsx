@@ -1,32 +1,34 @@
 import { useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+// import {useParams} from 'react-router-dom';
 import * as coffeelogServices from '../../services/coffeelogService';
 
 const CoffeelogForm = (props) => {
      const [category, setCategory] = useState('');
-     const [selectedPricerange, setSelectedPricerange] = useState('');
-     const [selectedType, setSelectedType] = useState('');
+
      const [formData, setFormData] = useState({
         title: '',
         location: '',
         shopname: '',
         address: '',
         ingredients: '',
+        description: '',
+        pricerange: '',
+        type: '',
+        category: '',
 
 });
 
      const handleCategoryChange = (event) =>{
-        setCategory(event.target.value);
+        const value = event.target.value;
+        setCategory(value);
+        setFormData(prevData => ({
+            ...prevData,
+            category: value
+        }));
      };
      
 
-     const handlePricerangeChange = (event) => {
-        setSelectedPricerange(event.target.value);
-     }
-     const handleTypeChange = (event) => {
-        setSelectedType(event.target.value);
-     };
-     
+ 
      const handleInputChange = (event) => {
         const {name, value} = event.target;
         setFormData((prevData) => ({
@@ -38,7 +40,7 @@ const CoffeelogForm = (props) => {
 
      const renderForm = () => {
         switch(category) {
-            case'Coffee Bean': 
+            case'Coffee Beans': 
             return(
                 <div>
                     <label htmlFor="title">Title:</label>
@@ -47,7 +49,7 @@ const CoffeelogForm = (props) => {
                     id="title" 
                     name="title"
                     value={formData.title}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="location">Location:</label>
                     <input 
@@ -55,7 +57,7 @@ const CoffeelogForm = (props) => {
                     id="location" 
                     name="location"
                     value={formData.location}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="description">Description:</label>
                     <input 
@@ -63,7 +65,7 @@ const CoffeelogForm = (props) => {
                     id="description" 
                     name="description"
                     value={formData.description}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                 </div>
             );
@@ -76,14 +78,14 @@ const CoffeelogForm = (props) => {
                     id="shopname" 
                     name="shopname"
                     value={formData.shopname}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="pricerange">Price Range:</label>
                     <select 
                         id="pricerange" 
                         name ="pricerange"
-                        value={selectedPricerange}
-                        onChange={handlePricerangeChange}
+                        value={formData.pricerange}
+                        onChange={handleInputChange}
                     >
                         <option value="">---Choose your price range---</option>
                         <option value="$">$</option>
@@ -98,7 +100,7 @@ const CoffeelogForm = (props) => {
                    id="address" 
                    name="address"
                    value={formData.address}
-                   onchange={handleInputChange}
+                   onChange={handleInputChange}
                    />
                    <label htmlFor="description">Description:</label>
                    <input type="text" id="description" name="description"/>
@@ -113,7 +115,7 @@ const CoffeelogForm = (props) => {
                     id="title" 
                     name="title"
                     value={formData.title}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="ingredients">Ingredients:</label>
                     <input 
@@ -121,14 +123,14 @@ const CoffeelogForm = (props) => {
                     id="ingredients" 
                     name="ingredients"
                     value={formData.ingredients}
-                    onchange={handleInputChange}
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="type">Type of drink:</label>
                     <select 
                         id="type" 
                         name ="type"
-                        value={selectedType}
-                        onChange={handleTypeChange}
+                        value={formData.type}
+                        onChange={handleInputChange}
                     >
                         <option value="">---Drink Type---</option>
                         <option value="Espresso">Espresso</option>
@@ -152,9 +154,17 @@ const CoffeelogForm = (props) => {
             return null;
         }
      };
+
+
      const handleSubmit = (event) => {
         event.preventDefault();
-     };
+        if (formData.title && formData.location) {
+            props.handleAddCoffeelog(formData);
+            setFormData({ title: '', location: '', description: '', shopname: '', pricerange: '', ingredients: '', type: '' }); // Reset form
+        } else {
+            alert("Please fill in all required fields.");
+        }
+    };
 
      return (
         <>
