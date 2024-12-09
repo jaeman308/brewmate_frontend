@@ -38,7 +38,7 @@ const SigninForm = (props) => {
             <p>{message}</p>
             <form autoComplete="off" onSubmit={handleSubmit}>
                 <div>
-                    <label htlmFor="email">Username:</label>
+                    <label htmlFor="username">Username:</label>
                     <input
                     type="text"
                     autoComplete="off"

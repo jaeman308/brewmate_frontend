@@ -7,9 +7,9 @@ import {Link} from 'react-router-dom';
             <div>
                 <h2>Explore your collection here!</h2>
                 <ul>
-                    <li><Link to="/coffee-beans">Coffee Beans</Link></li>
-                    <li><Link to="/coffee-shops">Coffee Shops</Link></li>
-                    <li><Link to="/coffee-recipes">Coffee Recipes</Link></li>
+                    <li><Link to="/coffeelogs/Coffee%20Beans">Coffee Beans</Link></li>
+                    <li><Link to="/coffeelogs/Coffee%20Shops">Coffee Shops</Link></li>
+                    <li><Link to="/coffeelogs/Coffee%20Recipes">Coffee Recipes</Link></li>
                 </ul>
             </div>
         </main>

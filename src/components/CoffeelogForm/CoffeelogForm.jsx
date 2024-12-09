@@ -1,11 +1,10 @@
 import { useState, useEffect} from 'react';
-// import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import * as coffeelogServices from '../../services/coffeelogService';
 
-const CoffeelogForm = (props) => {
-     const [category, setCategory] = useState('');
 
-     const [formData, setFormData] = useState({
+const CoffeelogForm = ({ handleAddCoffeelog, handleUpdateCoffeelog, isSubmitting }) => {
+       const [formData, setFormData] = useState({
         title: '',
         location: '',
         shopname: '',
@@ -18,9 +17,23 @@ const CoffeelogForm = (props) => {
 
 });
 
+const[error, setError] = useState('');
+const {coffeelogId} = useParams();
+
+
+useEffect(() =>{
+    if (coffeelogId){
+        const fetchCoffeelog = async () => {
+            const coffeeLogData = await coffeelogServices.show(coffeelogId);
+            setFormData(coffeeLogData)
+        }
+         fetchCoffeelog();
+    };
+}, [coffeelogId]);
+
+
      const handleCategoryChange = (event) =>{
         const value = event.target.value;
-        setCategory(value);
         setFormData(prevData => ({
             ...prevData,
             category: value
@@ -38,8 +51,54 @@ const CoffeelogForm = (props) => {
 
      }
 
+     const validateForm = () => {
+        if (!formData.category){
+            setError('Please select a category.')
+            return false;
+        }
+
+        switch (formData.category){
+            case'Coffee Beans':
+                return formData.title && formData.location && formData.description;
+            case'Coffee Shops':
+                return formData.title && formData.shopname && formData.pricerange && formData.address &&formData.description;
+            case 'Coffee Recipes':
+                return formData.title && formData.ingredients && formData.type;
+            default: 
+                return false;
+
+        }
+     };
+
+     const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (validateForm()){
+            setError('');
+            try {
+                if(coffeelogId) {
+                    await handleUpdateCoffeelog(coffeelogId, formData);
+                } else {
+                    await handleAddCoffeelog(formData);
+                }
+                setFormData({
+                    title: '', 
+                    location: '', 
+                    description: '', 
+                    shopname: '', 
+                    pricerange: '', 
+                    ingredients: '', 
+                    type: '', 
+                    category: ''
+                });
+            } catch (err) {
+                setError('Failed to add coffee log.');
+                console.error('Error adding coffee log:', err);
+            }
+        }
+    };
+
      const renderForm = () => {
-        switch(category) {
+        switch(formData.category) {
             case'Coffee Beans': 
             return(
                 <div>
@@ -69,9 +128,17 @@ const CoffeelogForm = (props) => {
                     />
                 </div>
             );
-            case 'Coffee Shop':
+            case 'Coffee Shops':
                 return(
                     <div>
+                    <label htmlFor="title">Title:</label>
+                    <input 
+                    type="text" 
+                    id="title" 
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    />
                     <label htmlFor="shopname">Shop Name:</label>
                     <input 
                     type="text" 
@@ -103,10 +170,16 @@ const CoffeelogForm = (props) => {
                    onChange={handleInputChange}
                    />
                    <label htmlFor="description">Description:</label>
-                   <input type="text" id="description" name="description"/>
+                   <input 
+                   type="text"
+                   id="description" 
+                   name="description"
+                   value={formData.description}
+                   onChange={handleInputChange}
+                   />
                 </div>
                 );
-            case 'Coffee Recipe':
+            case 'Coffee Recipes':
             return (
                 <div>
                     <label htmlFor="title">Title:</label>
@@ -156,15 +229,7 @@ const CoffeelogForm = (props) => {
      };
 
 
-     const handleSubmit = (event) => {
-        event.preventDefault();
-        if (formData.title && formData.location) {
-            props.handleAddCoffeelog(formData);
-            setFormData({ title: '', location: '', description: '', shopname: '', pricerange: '', ingredients: '', type: '' }); // Reset form
-        } else {
-            alert("Please fill in all required fields.");
-        }
-    };
+ 
 
      return (
         <>
@@ -174,20 +239,22 @@ const CoffeelogForm = (props) => {
                     <select
                      id="category" 
                      name="category" 
-                     value={category} 
-                     onChange={handleCategoryChange}>
+                     value={formData.category} 
+                     onChange={handleCategoryChange}
+                     >
                         <option value="">Category</option>
-                        <option value="Coffee Bean">Coffee Bean</option>
-                        <option value="Coffee Shop">Coffee Shop</option>
-                        <option value="Coffee Recipe">Coffee Recipe</option>
+                        <option value="Coffee Beans">Coffee Bean</option>
+                        <option value="Coffee Shops">Coffee Shop</option>
+                        <option value="Coffee Recipes">Coffee Recipe</option>
                     </select>
                     </div>
                     {renderForm()}
-            <button type="submit">Submit</button>
+                    {error && <div className="error">{error}</div>}
+            <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Submitting' : 'Submit'}</button>
             </form>        
             
         </>
-     )
+     );
 };
 
 export default CoffeelogForm;
