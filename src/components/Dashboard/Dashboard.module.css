@@ -1,7 +1,7 @@
 .container {
     top: 0; 
     z-index: 1;
-    width: 100%;
+    width: 90%;
     height: 80px;
     display: flex;
     position: fixed; 
@@ -26,6 +26,13 @@
     flex-direction: row;
     margin: 20px;
     text-align: center;
+  }
+
+  .ul {
+    display: flex;
+    padding: 10px;
+    margin: 20px;
+    justify-content: space-evenly;
   }
   .coffeebeans, .coffeeshops, .coffeerecipes {
     display: flex;

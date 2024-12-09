@@ -7,7 +7,7 @@ import Styles from './DashBoard.module.css'
             <h1> Welcome, {user.username.toUpperCase()}</h1>
             <div>
                 <h2>Explore your collection here!</h2>
-                <ul>
+                <ul className={Styles.ul}>
                     <li className={Styles.coffeebeans}>
                         <img src="https://i.postimg.cc/Mp80WNyL/2.png" alt="coffee bag"/>
                         <Link to="/coffeelogs/Coffee%20Beans">Coffee Beans</Link>

@@ -6,18 +6,13 @@
 }
 
 html, body {
-  margin: 0;
+  background-image: 
+  linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+  url("https://i.postimg.cc/Kjgr022Z/hi.png");
+  background-repeat:no-repeat;
+  background-size: cover;
   height: 100%;
-  overflow: hidden;
-  background-color: #f2f4f8;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: sans-serif;
- 
-  --primary: #2c6e63;
-  --background: #f2f4f8;
-  --card-background: white;
-  --border: rgb(220, 220, 220);
+  background-position: center;
 }
 
 #root {
