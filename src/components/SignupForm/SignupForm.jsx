@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
+import styles from '../SignupForm/SignupForm.module.css'
 
 const SignupForm = (props) => {
     const navigate = useNavigate();
@@ -38,14 +39,19 @@ const SignupForm = (props) => {
     }
 
     return (
-        <main>
+        <main className={styles.container}>
+            <section>
+            <img src="https://i.postimg.cc/RZVqZ7Zc/MUG-SCOUT-2.png" alt="logo"/>
+            </section>
+            <section>
+            <form onSubmit={handleSubmit}> 
             <h1> Sign UP</h1>
             <p>{message}</p>
-            <form onSubmit={handleSubmit}> 
                 <div>
                     <label htmlFor='username'>Username:</label>
                     <input 
                     type="text"
+                    autoComplete="random-string"
                     id="name"
                     value={username}
                     name="username"
@@ -56,6 +62,7 @@ const SignupForm = (props) => {
                     <label htmlFor="email"> Email:</label>
                     <input 
                     type="email"
+                    autoComplete="off"
                     id="email"
                     value={email}
                     name="email"
@@ -66,6 +73,7 @@ const SignupForm = (props) => {
                     <label htmlFor="password">Password:</label>
                     <input 
                     type="password"
+                    autoComplete="off"
                     id="password"
                     value={password}
                     name="password"
@@ -76,6 +84,7 @@ const SignupForm = (props) => {
                     <label htmlFor="confirm">Confirm Password:</label>
                     <input 
                     type="password"
+                    autoComplete="new-password"
                     id="confirm"
                     value={passwordConf}
                     name="passwordConf"
@@ -89,6 +98,7 @@ const SignupForm = (props) => {
                     </Link>
                 </div>
             </form>
+            </section>
         </main>
     )
 };
