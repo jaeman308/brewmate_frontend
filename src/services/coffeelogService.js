@@ -1,44 +1,33 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/coffeelogs`;
 
-const index = async (category = '') => {
+const index = async () => {
     try{
-        let url = BASE_URL;
-        if (category) {
-            url = `${BASE_URL}/${category}`;
-           }
-        const res = await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+        const res = await fetch(BASE_URL, {
+            headers : { Authorization: `Bearer ${localStorage.getItem('token')}`}
         });
-        if(!res.ok) {
-            const errorDetails = await res.text();
-            throw new Error(`Failed to fetch Coffee logs. Status: ${res.status}, Message: ${errorDetails}`);
-        }
         return res.json();
     }catch (error) {
-        console.log('Error fetching coffee logs:', error);
-        throw error;
-    }
-};
-
-const show = async (coffeelogId) => {
-    try{
-        const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
-        });
-        if (!res.ok) {
-            throw new Error (`Failed to fetch coffee log. Status ${res.status}`);
-        }
-        const data = await res.json
-        return data;
-    } catch (error) {
         console.log(error)
     }
 }
 
+
+
+
+const show = async (coffeelogId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
+        return res.json();
+    } catch (error) {
+        console.log('Error fetching coffee log:', error);
+        throw error;
+    }
+};
+
 const create = async (coffeelogFormData) => {
-    try{
+    try {
         const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
@@ -47,13 +36,19 @@ const create = async (coffeelogFormData) => {
             },
             body: JSON.stringify(coffeelogFormData),
         });
+        if (!res.ok) {
+            const errorDetails = await res.text();
+            throw new Error(`Failed to create coffee log. Status: ${res.status}, Message: ${errorDetails}`);
+        }
         return res.json();
-    }catch (error) {
-        console.log(error)
+    } catch (error) {
+        console.log('Error creating coffee log:', error);
+        throw error;
     }
-}
+};
+
 const createNote = async (coffeelogId, noteFormData) => {
-    try{
+    try {
         const res = await fetch(`${BASE_URL}/${coffeelogId}/notes`, {
             method: 'POST',
             headers: {
@@ -62,29 +57,34 @@ const createNote = async (coffeelogId, noteFormData) => {
             },
             body: JSON.stringify(noteFormData),
         });
-        return res.json();
+         return res.json();
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
+
 const deleteCoffeelog = async (coffeelogId) => {
-    try{
+    try {
         const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(),
         });
+        if (!res.ok) {
+            const errorDetails = await res.text();
+            throw new Error(`Failed to delete coffee log. Status: ${res.status}, Message: ${errorDetails}`);
+        }
         return res.json();
-    }catch (error){
-        console.log(error);
+    } catch (error) {
+        console.log('Error deleting coffee log:', error);
+        throw error;
     }
 };
 
-const updateCoffeelog = async (coffeelogId, coffeelogFormData) =>  {
-    try{
+const updateCoffeelog = async (coffeelogId, coffeelogFormData) => {
+    try {
         const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
             method: 'PUT',
             headers: {
@@ -92,15 +92,17 @@ const updateCoffeelog = async (coffeelogId, coffeelogFormData) =>  {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(coffeelogFormData),
-
-        })
+        });
+        if (!res.ok) {
+            const errorDetails = await res.text();
+            throw new Error(`Failed to update coffee log. Status: ${res.status}, Message: ${errorDetails}`);
+        }
         return res.json();
-
     } catch (error) {
-        console.log(error);
+        console.log('Error updating coffee log:', error);
+        throw error;
     }
-} 
-
+};
 
 export {
     index,
@@ -109,5 +111,4 @@ export {
     createNote,
     deleteCoffeelog,
     updateCoffeelog
-
-}
+};

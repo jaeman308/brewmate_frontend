@@ -12,6 +12,7 @@ const NavBar = ({ handleSignout }) => {
               <img src="https://i.postimg.cc/RZVqZ7Zc/MUG-SCOUT-2.png" alt="logo"/>
                 <ul>
                     <li> <Link to="/">DashBoard</Link></li>
+                    <li><Link to="/coffeelogs">Coffeelogs</Link></li>
                     <li><Link to="/coffeelogs/new">Coffee Log</Link></li>
                     <li><Link to="" onClick={handleSignout}>Sing Out</Link></li>
                 </ul>

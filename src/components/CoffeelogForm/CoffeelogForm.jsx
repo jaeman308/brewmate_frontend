@@ -191,7 +191,7 @@ useEffect(() =>{
                     onChange={handleInputChange}
                     />
                     <label htmlFor="ingredients">Ingredients:</label>
-                    <input 
+                    <textarea
                     type="text" 
                     id="ingredients" 
                     name="ingredients"
