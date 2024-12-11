@@ -29,7 +29,8 @@ https://www.canva.com/design/DAGXghPjcGA/2PfR58WIwx3x44IbIq0UMw/edit?utm_content
 ## Links
 
 - ### Backend
-https://brew-mate-app-1a60d3e40d9b.herokuapp.com/
+https://brewmate-backend.onrender.com
+
 
 - ### Deployed
 https://yourbrewmate.netlify.app/
