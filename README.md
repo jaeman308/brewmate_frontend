@@ -27,13 +27,17 @@ https://www.canva.com/design/DAGXghPjcGA/2PfR58WIwx3x44IbIq0UMw/edit?utm_content
 
 
 ## Links
+- ## Backend code link 
+https://github.com/jaeman308/brewmate_backend
 
-- ### Backend
+- ### Backend Deployed Link 
 https://brewmate-backend.onrender.com
-
 
 - ### Deployed
 https://yourbrewmate.netlify.app/
+
+- ## Planning Link
+https://trello.com/b/G5f5dduW/brewmate
 
 ## Stretch Goals
 
