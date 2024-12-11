@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fffaf3;
+    color: black;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: black;
+  }
+  
+  section {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    color: black;
+  }
+  
+  section img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+  }
+  
+
+
+  article {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fffaf3;
+  }
+  
+  article header {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+  
+  .note-form {
+    margin-bottom: 20px;
+  }

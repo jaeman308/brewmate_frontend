@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
         <main>
             <h1> Welcome, {user.username}</h1>
             <div>
-                <h2> Your coffee collection here!</h2>
+              <h1> Coming soon show case your access to  other parts of the app.</h1>
             </div>
         </main>
     )

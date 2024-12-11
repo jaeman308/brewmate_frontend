@@ -1,11 +1,10 @@
 import {useState, useEffect} from 'react';
-import * as coffeelogService from '../../services/coffeelogService';
-
+import styles from "../NoteForm/NoteForm.module.css"
 const NoteForm = (props) => {
     const [formData, setFormData] = useState({ text: '' });
 
 
-    
+
 
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value});
@@ -17,7 +16,10 @@ const NoteForm = (props) => {
         setFormData({ text: ''});
     };
     return (
-        <form onSubmit={handleSubmit}>
+        <main className={styles.container}>
+        <form  onSubmit={handleSubmit}>
+            <section>
+                <div>
             <label htmlFor='text-input'>Your Note:</label>
             <textarea 
             required
@@ -27,8 +29,11 @@ const NoteForm = (props) => {
             value={(formData.text)}
             onChange={handleChange}
             />
+            </div>
+            </section>
             <button type="submit">Submit Note</button>
         </form>
+        </main>
     );
 };
 export default NoteForm;

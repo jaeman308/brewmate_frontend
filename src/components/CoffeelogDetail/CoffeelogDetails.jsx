@@ -3,6 +3,7 @@ import { useState, useEffect, useContext} from'react';
 import { useParams, Link} from 'react-router-dom';
 import * as coffeelogService from '../../services/coffeelogService'
 import NoteForm from "../NoteForm/NoteForm";
+import styles from '../CoffeelogDetail/coffeelogdetail.module.css'
 
 const CoffeeLogDetails = (props)=> {
     const {coffeelogId} = useParams();
@@ -24,7 +25,7 @@ const CoffeeLogDetails = (props)=> {
     if(!coffeelog) return <main>Brewing up your logs...</main>
 
     return(
-        <main>
+        <main className={styles.container}>
             <header>
                 <h1>{coffeelog.title}</h1>
                 <p>

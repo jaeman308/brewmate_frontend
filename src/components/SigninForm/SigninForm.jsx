@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import * as authService from '../../services/authService';
+import styles from '../SigninForm/SigninForm.module.css'
 
 const SigninForm = (props) => {
     const navigate = useNavigate();
@@ -33,10 +34,14 @@ const SigninForm = (props) => {
     };
 
     return (
-        <main>
+        <main className={styles.container}>
+            <section>
+                <img src="https://i.postimg.cc/y8vjPRqm/MUG-SCOUT-3.png" alt="signin logo"/>
+            </section>
+            <section>
+            <form autoComplete="off" onSubmit={handleSubmit}>
             <h1>Log In</h1>
             <p>{message}</p>
-            <form autoComplete="off" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -66,6 +71,7 @@ const SigninForm = (props) => {
                     </Link>
                 </div>
             </form>
+            </section>
         </main>
     );
 };

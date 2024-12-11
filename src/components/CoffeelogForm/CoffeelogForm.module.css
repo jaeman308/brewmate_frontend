@@ -1,0 +1,130 @@
+
+.container {
+    height: 100%;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 20px 18px;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .container label {
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+  }
+  
+
+  .container input,
+  .container select,
+  .container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+  }
+  
+
+  .container input:focus,
+  .container select:focus,
+  .container textarea:focus {
+    outline: none;
+    border-color: #561217;
+    box-shadow: 0 0 3px rgba(86, 18, 23, 0.5);
+  }
+  
+
+  
+
+  .container button {
+    background-color: #561217;
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 20px;
+  }
+  
+
+  .container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  
+  .container button:hover:not(:disabled) {
+    background-color: #8e1c28;
+  }
+  
+
+  .container select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+
+  .container textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+
+  .container .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  
+  .container select#category {
+    width: 100%;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+
+  .container form {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fffaf3;
+    
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #561217;
+  }
+  
+
+  .container form > div {
+    margin-bottom: 20px;
+  }
+  
+  
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }

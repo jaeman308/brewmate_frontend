@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import * as coffeelogServices from '../../services/coffeelogService';
-
+import styles from '../CoffeelogForm/CoffeelogForm.module.css'
 
 const CoffeelogForm = ({ handleAddCoffeelog, handleUpdateCoffeelog, isSubmitting }) => {
        const [formData, setFormData] = useState({
@@ -233,6 +233,7 @@ useEffect(() =>{
 
      return (
         <>
+        <main className={styles.container}>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='category'>Coffee Log</label>
@@ -252,7 +253,7 @@ useEffect(() =>{
                     {error && <div className="error">{error}</div>}
             <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Submitting' : 'Submit'}</button>
             </form>        
-            
+            </main>
         </>
      );
 };
