@@ -34,7 +34,7 @@ const CoffeeLogDetails = (props)=> {
                 </p>
                 {coffeelog.author._id === user._id && (
                     <>
-                    <Link to={`/coffeelogs/${coffeelogId}/edit`}>Edit</Link>
+                    <button className={styles.editbutton}><Link to={`/coffeelogs/${coffeelogId}/edit`}>Edit</Link></button>
                     <button onClick={() => props.handleDeleteCoffeelog(coffeelogId)}>Delete</button>
                     </>
                 )}
