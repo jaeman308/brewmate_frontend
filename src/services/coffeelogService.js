@@ -12,8 +12,6 @@ const index = async () => {
 }
 
 
-
-
 const show = async (coffeelogId) => {
     try {
         const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
@@ -83,32 +81,32 @@ const deleteCoffeelog = async (coffeelogId) => {
     }
 };
 
-const updateCoffeelog = async (coffeelogId, coffeelogFormData) => {
-    try {
-        const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(coffeelogFormData),
-        });
-        if (!res.ok) {
-            const errorDetails = await res.text();
-            throw new Error(`Failed to update coffee log. Status: ${res.status}, Message: ${errorDetails}`);
-        }
-        return res.json();
-    } catch (error) {
-        console.log('Error updating coffee log:', error);
-        throw error;
-    }
-};
 
+const update = async (coffeelogId, coffeelogFormData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${coffeelogId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(coffeelogFormData),
+      });
+      if (!res.ok) {
+        const errorDetails = await res.text();
+        throw new Error(`Failed to update coffee log. Status: ${res.status}, Message: ${errorDetails}`);
+      }
+      return res.json();
+    } catch (error) {
+      console.log('Error updating coffee log:', error);
+      throw error;
+    }
+  };
 export {
     index,
     show,
     create,
     createNote,
     deleteCoffeelog,
-    updateCoffeelog
+    update,
 };

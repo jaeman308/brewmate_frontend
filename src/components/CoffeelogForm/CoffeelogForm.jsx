@@ -70,33 +70,23 @@ useEffect(() =>{
         }
      };
 
-     const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (validateForm()){
-            setError('');
-            try {
-                if(coffeelogId) {
-                    await handleUpdateCoffeelog(coffeelogId, formData);
-                } else {
-                    await handleAddCoffeelog(formData);
-                }
-                setFormData({
-                    title: '', 
-                    location: '', 
-                    description: '', 
-                    shopname: '', 
-                    pricerange: '', 
-                    ingredients: '', 
-                    type: '', 
-                    category: ''
-                });
-            } catch (err) {
-                setError('Failed to add coffee log.');
-                console.error('Error adding coffee log:', err);
+        if (validateForm()) {
+          setError('');
+          try {
+            if (coffeelogId) {
+              await handleUpdateCoffeelog(coffeelogId, formData);
+            } else {
+              await handleAddCoffeelog(formData);
             }
+          } catch (err) {
+            setError(`Failed to ${coffeelogId ? 'update' : 'add'} coffee log: ${err.message}`);
+            console.error(`Error ${coffeelogId ? 'updating' : 'adding'} coffee log:`, err);
+          }
         }
-    };
-
+      };
+      
      const renderForm = () => {
         switch(formData.category) {
             case'Coffee Beans': 

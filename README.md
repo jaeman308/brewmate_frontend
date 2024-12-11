@@ -2,7 +2,9 @@
 
 ![logo](image.png)
 
-Welcome to your coffee dreams. THis is a place that you are able to log all of your favorites from beans to recipes. 
+Welcome to your coffee dreams. THis is a place that you are able to log all of your favorites from beans to recipes.
+
+I love coffee and to have all of my favorites in place was a dream. 
 
 ## User Story 
 - As a guest I want to be able to have a landing page that tells me what the apps does. 

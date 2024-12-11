@@ -43,14 +43,21 @@ const handleAddCoffeelog = async (coffeelogFormData) => {
     }
 };
 
+
+
 const handleUpdateCoffeelog = async (coffeelogId, coffeelogFormData) => {
   setIsSubmitting(true);
-  try{
-    const updateCoffeelog = await coffeelogService.updateCoffeelog(coffeelogId, coffeelogFormData);
-    setCoffeelogs(coffeelogs.map((coffeelog) => (coffeelogId === coffeelog._id ? updateCoffeelog : coffeelog)));
+  try {
+    const updatedCoffeelog = await coffeelogService.update(coffeelogId, coffeelogFormData);
+    setCoffeelogs(prevCoffeelogs => 
+      prevCoffeelogs.map(coffeelog => 
+        coffeelog._id === updatedCoffeelog._id ? updatedCoffeelog : coffeelog
+      )
+    );
     navigate(`/coffeelogs/${coffeelogId}`);
-  }catch (error) {
+  } catch (error) {
     console.error('Error updating coffee log:', error);
+    throw error;
   } finally {
     setIsSubmitting(false);
   }
