@@ -32,8 +32,7 @@ https://www.canva.com/design/DAGXghPjcGA/2PfR58WIwx3x44IbIq0UMw/edit?utm_content
 https://brew-mate-app-1a60d3e40d9b.herokuapp.com/
 
 - ### Deployed
-https://yourbrewmate.netlify.app/signin
-
+https://yourbrewmate.netlify.app/
 
 ## Stretch Goals
 
