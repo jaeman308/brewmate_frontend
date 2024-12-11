@@ -25,7 +25,6 @@ const SigninForm = (props) => {
         e.preventDefault();
         try {
             const user = await authService.signin(formData);
-
             props.setUser(user);
             navigate('/');
         }catch (error) {
